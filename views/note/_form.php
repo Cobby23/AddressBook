@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'entry_id')->textInput() ?>
+    <?= $form->field($model, 'entry_id')->hiddenInput(['value' => $entry_id])->label(false) ?>
 
     <?= $form->field($model, 'note')->textarea(['rows' => 6]) ?>
 

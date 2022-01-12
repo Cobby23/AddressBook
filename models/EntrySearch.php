@@ -5,6 +5,7 @@ namespace app\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Entry;
+use Yii;
 
 /**
  * EntrySearch represents the model behind the search form of `app\models\Entry`.
@@ -40,7 +41,10 @@ class EntrySearch extends Entry
      */
     public function search($params)
     {
-        $query = Entry::find();
+        if(Yii::$app->user->identity->superadmin)
+            $query = Entry::find();
+        else
+            $query = Entry::find()->where(['user_id' => Yii::$app->user->id]);
 
         // add conditions that should always apply here
 

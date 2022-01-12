@@ -30,22 +30,53 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'user_id',
+            //'id',
+            //'user_id',
             'first_name',
             'last_name',
-            'company',
+            //'company',
             //'address',
             //'phone_number',
-            //'email:email',
+            'email:email',
             //'fax',
             //'mobile_number',
             //'note',
             [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Entry $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                'label' => '',
+                'format' => 'html',
+                'value' => function($model){
+                    return Html::a('See more', Url::toRoute(['view', 'id' => $model->id]));
+                }
+            ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                    'delete' => function($url){
+                        return Html::a('<i class="far fa-trash-alt"></i>', $url, [
+                            'title' => Yii::t('yii', 'Delete'),
+                            'data' => [
+                                'confirm' => 'Are you sure you want to delete this item?',
+                                'method' => 'post',
+                            ],
+                        ]);
+                    },
+                    'update' => function ($url) {
+                        return Html::a('<i class="fas fa-pencil-alt"></i>', $url, [
+                            'title' => Yii::t('yii', 'Update'),
+                        ]);       
+                    },
+                    'add-note' => function ($url) {
+                        return Html::a('<i class="far fa-sticky-note"></i>', $url, [
+                            'title' => Yii::t('yii', 'Add note'),
+                        ]);       
+                    },
+                    'view-notes' => function ($url) {
+                        return Html::a('<i class="far fa-clipboard"></i>', $url, [
+                            'title' => Yii::t('yii', 'View notes'),
+                        ]);       
+                    },
+                ],
+                'template' => "{update} {delete} {add-note} {view-notes}"
             ],
         ],
     ]); ?>

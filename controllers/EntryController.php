@@ -117,6 +117,15 @@ class EntryController extends Controller
         return $this->redirect(['index']);
     }
 
+    
+    public function actionAddNote($id){
+        return $this->redirect(['note/create', 'entry_id' => $id]);
+    }
+
+    public function actionViewNotes($id){
+        return $this->redirect(['note/index', 'entry_id' => $id]);
+    }
+
     /**
      * Finds the Entry model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

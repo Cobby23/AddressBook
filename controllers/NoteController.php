@@ -7,6 +7,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * NoteController implements the CRUD actions for Note model.
@@ -36,20 +37,20 @@ class NoteController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex($entry_id)
     {
+        $query = Yii::$app->user->identity->superadmin ? Note::find() : Note::find()->where(['entry_id' => $entry_id]);
         $dataProvider = new ActiveDataProvider([
-            'query' => Note::find(),
-            /*
+            'query' => $query,      
             'pagination' => [
-                'pageSize' => 50
+                'pageSize' => 10
             ],
             'sort' => [
                 'defaultOrder' => [
                     'id' => SORT_DESC,
                 ]
             ],
-            */
+            
         ]);
 
         return $this->render('index', [
@@ -88,6 +89,7 @@ class NoteController extends Controller
         }
 
         return $this->render('create', [
+            'entry_id' => $this->request->get('entry_id'),
             'model' => $model,
         ]);
     }
