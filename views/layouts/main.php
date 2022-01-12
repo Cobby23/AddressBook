@@ -9,8 +9,7 @@ use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
-
-use webvimark\modules\UserManagement\components\GhostMenu;
+use webvimark\modules\UserManagement\models\User;
 use webvimark\modules\UserManagement\UserManagementModule;
 
 AppAsset::register($this);
@@ -39,23 +38,34 @@ AppAsset::register($this);
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
-        'items' => [
+        'encodeLabels' => false,
+        'items' => 
+            User::getCurrentUser() === NULL ? 
             [
-                'label' => 'Backend routes',
-                'items'=>UserManagementModule::menuItems()
-            ],
+                ['label'=>'Login', 'url'=>['/user-management/auth/login']],
+            ]
+        :
             [
-                'label' => 'Frontend routes',
-                'items'=>[
-                    ['label'=>'Login', 'url'=>['/user-management/auth/login']],
-                    ['label'=>'Logout', 'url'=>['/user-management/auth/logout']],
-                    ['label'=>'Registration', 'url'=>['/user-management/auth/registration']],
-                    ['label'=>'Change own password', 'url'=>['/user-management/auth/change-own-password']],
-                    ['label'=>'Password recovery', 'url'=>['/user-management/auth/password-recovery']],
-                    ['label'=>'E-mail confirmation', 'url'=>['/user-management/auth/confirm-email']],
-                ],
+                ['label'=>'Entries', 'url'=>['/entry/index']],
+                (Yii::$app->user->identity->superadmin) ?
+                [
+                    'label' => 'Backend routes',
+                    'items' => UserManagementModule::menuItems()
+                ] : '',
+                (Yii::$app->user->identity->superadmin) ?
+                [
+                    'label' => 'Frontend routes',
+                    'items'=>[
+                        User::getCurrentUser() === NULL ? ['label'=>'Login', 'url'=>['/user-management/auth/login']] : ['label'=>'Logout', 'url'=>['/user-management/auth/logout']],
+                        ['label'=>'Registration', 'url'=>['/user-management/auth/registration']],
+                        ['label'=>'Change own password', 'url'=>['/user-management/auth/change-own-password']],
+                        ['label'=>'Password recovery', 'url'=>['/user-management/auth/password-recovery']],
+                        ['label'=>'E-mail confirmation', 'url'=>['/user-management/auth/confirm-email']],
+                    ],
+                ] : '',
+                User::getCurrentUser() === NULL ? ['label'=>'Login', 'url'=>['/user-management/auth/login']] : ['label'=>'Logout', 'url'=>['/user-management/auth/logout']],
             ],
-        ]
+        
     ]);
     NavBar::end();
     ?>
