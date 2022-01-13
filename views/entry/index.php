@@ -75,8 +75,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             'title' => Yii::t('yii', 'View notes'),
                         ]);       
                     },
+                    'add-label' => function ($url) {
+                        return Html::a('<i class="fas fa-tags"></i>', $url, [
+                            'title' => Yii::t('yii', 'Add label'),
+                        ]);
+                    }
                 ],
-                'template' => "{update} {delete} {add-note} {view-notes}"
+                'template' => "{update} {delete} {add-note} {view-notes} {add-label}"
             ],
         ],
     ]); ?>

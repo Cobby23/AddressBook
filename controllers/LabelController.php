@@ -2,18 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Entry;
-use app\models\EntrySearch;
-use app\models\EntryToLabel;
-use app\models\User;
+use app\models\Label;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * EntryController implements the CRUD actions for Entry model.
+ * LabelController implements the CRUD actions for Label model.
  */
-class EntryController extends Controller
+class LabelController extends Controller
 {
     /**
      * @inheritDoc
@@ -34,23 +32,33 @@ class EntryController extends Controller
     }
 
     /**
-     * Lists all Entry models.
+     * Lists all Label models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new EntrySearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider = new ActiveDataProvider([
+            'query' => Label::find(),
+            /*
+            'pagination' => [
+                'pageSize' => 50
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ]
+            ],
+            */
+        ]);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single Entry model.
+     * Displays a single Label model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -63,13 +71,13 @@ class EntryController extends Controller
     }
 
     /**
-     * Creates a new Entry model.
+     * Creates a new Label model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Entry();
+        $model = new Label();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -85,7 +93,7 @@ class EntryController extends Controller
     }
 
     /**
-     * Updates an existing Entry model.
+     * Updates an existing Label model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -105,7 +113,7 @@ class EntryController extends Controller
     }
 
     /**
-     * Deletes an existing Entry model.
+     * Deletes an existing Label model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -118,39 +126,16 @@ class EntryController extends Controller
         return $this->redirect(['index']);
     }
 
-    
-    public function actionAddNote($id){
-        return $this->redirect(['note/create', 'entry_id' => $id]);
-    }
-
-    public function actionViewNotes($id){
-        return $this->redirect(['note/index', 'entry_id' => $id]);
-    }
-
-    public function actionAddLabel($id){
-        $model = new EntryToLabel();
-        $model->entry_id = $id;
-
-        if($model->load($this->request->post()) && $model->save()){
-            return $this->redirect(['view', 'id' => $id]);
-        }
-        else{
-            return $this->render('label_form', [
-                'model' => $model,
-            ]);
-        }
-    }
-
     /**
-     * Finds the Entry model based on its primary key value.
+     * Finds the Label model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Entry the loaded model
+     * @return Label the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Entry::findOne(['id' => $id])) !== null) {
+        if (($model = Label::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
