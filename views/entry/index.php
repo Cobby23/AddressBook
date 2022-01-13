@@ -6,6 +6,8 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use app\models\Entry;
+use app\models\EntryToLabel;
+use app\models\Label;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\EntrySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -49,6 +51,24 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
+                'label' => 'tags',
+                'format' => 'html',
+                'value' => 
+                    function($model){
+                        $labels = $model->getLabels();
+                        $return = '';
+
+                        foreach($labels as $label){
+                            $return = $return.Html::a('<i class="fas fa-tag"></i>', Url::to(Url::base().'/label/'.$label->id), [
+                                'style' => 'color:'.$label->color.';',
+                                'title' => $label->title,
+                            ]);
+                        }
+                        return $return;
+                    }
+                
+            ],
+            [
                 'class' => 'yii\grid\ActionColumn',
                 'buttons' => [
                     'delete' => function($url){
@@ -77,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                     'add-label' => function ($url) {
                         return Html::a('<i class="fas fa-tags"></i>', $url, [
-                            'title' => Yii::t('yii', 'Add label'),
+                            'title' => Yii::t('yii', 'Add Tag'),
                         ]);
                     }
                 ],

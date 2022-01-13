@@ -84,4 +84,14 @@ class Entry extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
+
+    public function getLabels()
+    {
+        $labels = Label::find()
+            ->innerJoin('{{%entry_to_label}}', 'label.id = entry_to_label.label_id')
+            ->where(['entry_to_label.entry_id' => $this->id])
+            ->all();
+
+        return $labels;
+    }
 }

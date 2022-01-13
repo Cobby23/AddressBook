@@ -47,6 +47,7 @@ AppAsset::register($this);
         :
             [
                 ['label'=>'Entries', 'url'=>['/entry/index']],
+                ['label'=>'Tags', 'url'=>['/label/index']],
                 (Yii::$app->user->identity->superadmin) ?
                 [
                     'label' => 'Backend routes',

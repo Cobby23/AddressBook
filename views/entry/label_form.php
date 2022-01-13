@@ -19,9 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $form->field($model, 'label_id')->dropDownList(Label::getLabelDropdown(), [
                     'prompt' => ['text' => Yii::t('app', 'Select...'),
                     'options' => ['disabled' => true]]
-                    //'selected' => ($model->project_id > 0) ? false : true]], 
-                    //'data-id' => 'project_id',
-                    //'data-url' => Url::to(['data/project-task-list'])
                     ])
                 ->label(Yii::t('app', 'Label')) ?>
 
