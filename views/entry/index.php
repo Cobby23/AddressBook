@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
-                'label' => 'tags',
+                'label' => 'Tags',
                 'format' => 'html',
                 'value' => 
                     function($model){
@@ -101,7 +101,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]);
                     }
                 ],
-                'template' => "{update} {delete} {add-note} {view-notes} {add-label}"
+                'template' => "{update} {delete} {add-note} {view-notes} {add-label}",
             ],
         ],
     ]); ?>

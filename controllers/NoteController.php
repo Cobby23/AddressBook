@@ -110,6 +110,7 @@ class NoteController extends Controller
         }
 
         return $this->render('update', [
+            'entry_id' => $this->request->get('entry_id'),
             'model' => $model,
         ]);
     }

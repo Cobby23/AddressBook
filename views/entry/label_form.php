@@ -14,6 +14,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="entry-form">
 
+    <?php if($errors){
+                echo Html::tag('p', $errors, ['class'=>'alert alert-danger']);
+            }
+    ?>
+
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'label_id')->dropDownList(Label::getLabelDropdown(), [

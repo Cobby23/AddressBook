@@ -30,6 +30,7 @@ class EntryToLabel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['entry_id'], 'validateUnique'],
             [['entry_id', 'label_id'], 'required'],
             [['entry_id', 'label_id'], 'integer'],
             [['entry_id'], 'exist', 'skipOnError' => true, 'targetClass' => Entry::className(), 'targetAttribute' => ['entry_id' => 'id']],
@@ -67,5 +68,12 @@ class EntryToLabel extends \yii\db\ActiveRecord
     public function getLabel()
     {
         return $this->hasOne(Label::className(), ['id' => 'label_id']);
+    }
+
+    public function validateUnique($attribute)
+    {
+        if (EntryToLabel::find()->where(['entry_id' => $this->entry_id])->andWhere(['label_id' => $this->label_id])) {
+            $this->addError($attribute, 'This tag already exists for this entry');
+        }
     }
 }
