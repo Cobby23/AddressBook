@@ -9,7 +9,7 @@ use app\models\Label;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Labels';
+$this->title = 'Tags';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="label-index">
@@ -26,9 +26,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'title',
-            'color',
+            [
+                'attribute' => 'color',
+                'format' => 'html',
+                'value' => function($model){
+                    return Html::tag('i','', ['class' => "fas fa-tint", 'style' => ['color' => $model->color]]);
+                }
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Label $model, $key, $index, $column) {

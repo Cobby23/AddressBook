@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\Entry;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Note */
@@ -29,8 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'entry_id',
+            //'id',
+            [
+                'attribute' => 'entry_id',
+                'label' => 'Entry',
+                'value' => Entry::findOne($model->entry_id)->first_name,
+            ],
             'note:ntext',
         ],
     ]) ?>

@@ -29,9 +29,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'title',
-            'color',
+            [
+                'attribute' => 'color',
+                'format' => 'html',
+                'value' => function($model){
+                    return Html::tag('i','', ['class' => "fas fa-tint", 'style' => ['color' => $model->color]]);
+                }
+            ],
         ],
     ]) ?>
 

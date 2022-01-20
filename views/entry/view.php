@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Entry */
@@ -32,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             [
                 'attribute' => 'user_id',
-                'value' => $model->user->username,
+                'value' => User::findOne($model->user_id)->username,
                 'label' => "User"
             ],
             'first_name',
