@@ -14,8 +14,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="entry-form">
 
-    <?php if($errors){
-                echo Html::tag('p', $errors, ['class'=>'alert alert-danger']);
+    <?php if(Yii::$app->request->get('errors')){
+                echo Html::tag('p', Yii::$app->request->get('errors'), ['class'=>'alert alert-danger']);
             }
     ?>
 

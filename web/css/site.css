@@ -82,3 +82,9 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+.has-error{
+    color:red;
+}
+.has-error select, .has-error input{
+    border-color: red;
+}

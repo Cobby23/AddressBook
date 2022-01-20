@@ -132,15 +132,11 @@ class EntryController extends Controller
         $model = new EntryToLabel();
         $model->entry_id = $id;
 
-        $errors = Yii::$app->request->get('errors');
-
-
         if($model->load($this->request->post()) && $model->save()){
             return $this->redirect(['view', 'id' => $id]);
         }
         else{
             return $this->render('label_form', [
-                'errors' => $errors,
                 'model' => $model,
             ]);
         }

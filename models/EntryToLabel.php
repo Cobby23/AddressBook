@@ -73,7 +73,7 @@ class EntryToLabel extends \yii\db\ActiveRecord
     public function validateUnique($attribute)
     {
         if (EntryToLabel::find()->where(['entry_id' => $this->entry_id])->andWhere(['label_id' => $this->label_id])) {
-            $this->addError($attribute, 'This tag already exists for this entry');
+            $this->addError('label_id', 'This tag already exists for this entry');
         }
     }
 }
