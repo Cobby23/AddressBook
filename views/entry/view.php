@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             [
                 'attribute' => 'user_id',
-                'value' => User::findOne($model->user_id)->username,
+                'value' => Yii::$app->user->username,
                 'label' => "User"
             ],
             'first_name',
