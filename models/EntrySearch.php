@@ -7,14 +7,8 @@ use yii\data\ActiveDataProvider;
 use app\models\Entry;
 use Yii;
 
-/**
- * EntrySearch represents the model behind the search form of `app\models\Entry`.
- */
 class EntrySearch extends Entry
 {
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -23,22 +17,12 @@ class EntrySearch extends Entry
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
 
-    /**
-     * Creates data provider instance with search query applied
-     *
-     * @param array $params
-     *
-     * @return ActiveDataProvider
-     */
     public function search($params)
     {
         if(Yii::$app->user->identity->superadmin)
@@ -55,8 +39,7 @@ class EntrySearch extends Entry
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+           
             return $dataProvider;
         }
 

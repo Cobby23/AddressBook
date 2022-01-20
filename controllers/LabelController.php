@@ -13,9 +13,6 @@ use yii\filters\VerbFilter;
  */
 class LabelController extends Controller
 {
-    /**
-     * @inheritDoc
-     */
     public function behaviors()
     {
         return array_merge(
@@ -31,11 +28,6 @@ class LabelController extends Controller
         );
     }
 
-    /**
-     * Lists all Label models.
-     *
-     * @return string
-     */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
@@ -70,11 +62,6 @@ class LabelController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Label model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
     public function actionCreate()
     {
         $model = new Label();
@@ -92,13 +79,6 @@ class LabelController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing Label model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -112,13 +92,6 @@ class LabelController extends Controller
         ]);
     }
 
-    /**
-     * Deletes an existing Label model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
@@ -126,13 +99,6 @@ class LabelController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the Label model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
-     * @return Label the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
     {
         if (($model = Label::findOne(['id' => $id])) !== null) {

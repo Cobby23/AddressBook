@@ -16,9 +16,6 @@ use Yii;
  */
 class EntryController extends Controller
 {
-    /**
-     * @inheritDoc
-     */
     public function behaviors()
     {
         return array_merge(
@@ -34,11 +31,6 @@ class EntryController extends Controller
         );
     }
 
-    /**
-     * Lists all Entry models.
-     *
-     * @return string
-     */
     public function actionIndex()
     {
         $searchModel = new EntrySearch();
@@ -50,12 +42,6 @@ class EntryController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Entry model.
-     * @param int $id ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionView($id)
     {
         return $this->render('view', [
@@ -63,11 +49,6 @@ class EntryController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Entry model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
     public function actionCreate()
     {
         $model = new Entry();
@@ -85,13 +66,6 @@ class EntryController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing Entry model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -105,13 +79,6 @@ class EntryController extends Controller
         ]);
     }
 
-    /**
-     * Deletes an existing Entry model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
@@ -142,13 +109,6 @@ class EntryController extends Controller
         }
     }
 
-    /**
-     * Finds the Entry model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
-     * @return Entry the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
     {
         if (($model = Entry::findOne(['id' => $id])) !== null) {

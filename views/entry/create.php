@@ -2,9 +2,6 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Entry */
-
 $this->title = 'Create Entry';
 $this->params['breadcrumbs'][] = ['label' => 'Entries', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;

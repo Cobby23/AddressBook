@@ -14,9 +14,6 @@ use Yii;
  */
 class NoteController extends Controller
 {
-    /**
-     * @inheritDoc
-     */
     public function behaviors()
     {
         return array_merge(
@@ -32,11 +29,6 @@ class NoteController extends Controller
         );
     }
 
-    /**
-     * Lists all Note models.
-     *
-     * @return string
-     */
     public function actionIndex($entry_id)
     {
         $query = Yii::$app->user->identity->superadmin ? Note::find() : Note::find()->where(['entry_id' => $entry_id]);
@@ -58,12 +50,6 @@ class NoteController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Note model.
-     * @param int $id ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionView($id)
     {
         return $this->render('view', [
@@ -71,11 +57,6 @@ class NoteController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Note model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
     public function actionCreate()
     {
         $model = new Note();
@@ -94,13 +75,6 @@ class NoteController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing Note model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -115,13 +89,6 @@ class NoteController extends Controller
         ]);
     }
 
-    /**
-     * Deletes an existing Note model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
@@ -129,13 +96,6 @@ class NoteController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the Note model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
-     * @return Note the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
     {
         if (($model = Note::findOne(['id' => $id])) !== null) {

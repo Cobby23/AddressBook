@@ -8,9 +8,6 @@ use yii\widgets\Pjax;
 use app\models\Entry;
 use app\models\EntryToLabel;
 use app\models\Label;
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\EntrySearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Entries';
 $this->params['breadcrumbs'][] = $this->title;

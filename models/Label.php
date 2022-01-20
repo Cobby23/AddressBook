@@ -4,30 +4,13 @@ namespace app\models;
 
 use Yii;
 
-/**
- * This is the model class for table "label".
- *
- * @property int $id
- * @property string|null $title
- * @property string $color
- * @property int $user_id
- *
- * @property EntryToLabel[] $entryToLabels
- * @property User $user
- */
 class Label extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'label';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -38,9 +21,6 @@ class Label extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
@@ -51,11 +31,6 @@ class Label extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * Gets query for [[EntryToLabels]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
     public function getEntryToLabels()
     {
         return $this->hasMany(EntryToLabel::className(), ['label_id' => 'id']);
@@ -76,11 +51,6 @@ class Label extends \yii\db\ActiveRecord
         return $return;
     }
 
-    /**
-     * Gets query for [[User]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
