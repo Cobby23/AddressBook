@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Label */
 
-$this->title = 'Create Label';
-$this->params['breadcrumbs'][] = ['label' => 'Labels', 'url' => ['index']];
+$this->title = 'Create Tag';
+$this->params['breadcrumbs'][] = ['label' => 'Tags', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="label-create">
