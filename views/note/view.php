@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Entry',
                 'value' => Entry::findOne($model->entry_id)->first_name,
             ],
-            'note:ntext',
+            'note:html',
         ],
     ]) ?>
 
