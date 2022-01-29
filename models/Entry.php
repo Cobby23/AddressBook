@@ -48,6 +48,11 @@ class Entry extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
+    public function getEntryToLabels() 
+    { 
+       return $this->hasMany(EntryToLabel::className(), ['entry_id' => 'id']); 
+    } 
+
     public function getLabels()
     {
         $labels = Label::find()

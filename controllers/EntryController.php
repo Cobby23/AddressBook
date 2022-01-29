@@ -5,11 +5,13 @@ namespace app\controllers;
 use app\models\Entry;
 use app\models\EntrySearch;
 use app\models\EntryToLabel;
+use app\models\CustomFields;
 use app\models\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use Yii;
+use yii\data\ActiveDataProvider;
 
 /**
  * EntryController implements the CRUD actions for Entry model.
@@ -44,8 +46,18 @@ class EntryController extends Controller
 
     public function actionView($id)
     {
+        $dataProvider = new ActiveDataProvider([
+            'query' => EntryToLabel::find()->where(['entry_id' => $id]),
+        ]);
+
+        $customDataProvider = new ActiveDataProvider([
+            'query' => CustomFields::getFieldsByEntryQuery($id),
+        ]);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProvider' => $dataProvider,
+            'customDataProvider' => $customDataProvider
         ]);
     }
 
@@ -107,6 +119,30 @@ class EntryController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionRemoveLabel($etl_id){
+        $model = EntryToLabel::findOne($etl_id);
+        $entry_id = $model->entry_id;
+
+        $model->delete();
+
+        return $this->redirect(['view', 'id' => $entry_id]);
+    }
+
+    public function acrionAddCustomField($id){
+        $model = new CustomFields();
+
+        return $this->renderAjax('custom_field_form', [
+                 'model' => $model,
+         ]);
+
+        // if(!($model->load($this->request->post()) && $model->save())){
+        //     return $this->render('custom_field_form',[
+        //         'model' => $model,
+        //         'entry_id' => $id,
+        //     ]);
+        // }
     }
 
     protected function findModel($id)

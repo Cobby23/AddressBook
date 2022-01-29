@@ -62,8 +62,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]);
                         }
                         return $return;
-                    }
-                
+                    },
+                'filter' => Label::getLabelDropdown(),
             ],
             [
                 'class' => 'yii\grid\ActionColumn',

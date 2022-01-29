@@ -1,8 +1,11 @@
 <?php
 
+use app\models\Label;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\models\User;
+use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Entry */
@@ -18,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Add Field', ['custom-fields/create', 'entry_id' => $model->id], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -47,5 +51,62 @@ $this->params['breadcrumbs'][] = $this->title;
             'note',
         ],
     ]) ?>
+
+    <h3>Custom fields</h3>
+    <?= GridView::widget([
+        'dataProvider' => $customDataProvider,
+        'layout' => '{items}',
+        'columns' => [
+            [
+                'label' => 'Field name',
+                'value' => 'label',
+            ],
+            [
+                'label' => 'Content',
+                'value' => 'content',
+            ],
+            [
+                'label' => '',
+                'format' => 'html',
+                'value' => function($model){
+                    return Html::a('Remove Field', Url::to(Url::base().'/custom-fields/delete?id='.$model->id), ['class' => 'text-danger']);
+                }
+            ]
+                
+        ] 
+    ]) 
+    ?>
+
+    <h3>Tags</h3>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'layout' => '{items}',
+        'columns' => [
+            [
+                'label' => 'Tag',
+                'value' => 'label.title',
+            ],
+            [
+                'label' => 'Color',
+                'format' => 'raw',
+                'value' => function($model){
+                    return Html::a('<i class="fas fa-tint"></i>', Url::to(Url::base().'/label/'.$model->label->id), [
+                        'style' => ['color' => $model->label->color],
+                        'title' => $model->label->title,
+                    ]);
+                   
+                }
+            ],
+            [
+                'label' => '',
+                'format' => 'html',
+                'value' => function($model){
+                    return Html::a('Remove Tag', Url::to(Url::base().'/entry/remove-label?etl_id='.$model->id), ['class' => 'text-danger']);
+                }
+            ]
+                
+        ] 
+    ]) 
+    ?>
 
 </div>

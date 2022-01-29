@@ -25,10 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'entry_id',
-            'note:ntext',
+            'note:html',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Note $model, $key, $index, $column) {

@@ -3,12 +3,13 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Note */
+/* @var $model app\models\CustomFields */
 
-$this->title = 'Create Note';
+$this->title = 'Create Custom Fields';
+$this->params['breadcrumbs'][] = ['label' => 'Custom Fields', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="note-create">
+<div class="custom-fields-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

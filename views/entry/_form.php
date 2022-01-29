@@ -1,5 +1,6 @@
 <?php
 
+use app\models\CustomFields;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
