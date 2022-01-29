@@ -8,7 +8,6 @@ use app\models\Entry;
 /* @var $model app\models\Note */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Notes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
